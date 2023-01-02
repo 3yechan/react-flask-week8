@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Nav from './components/Nav'
+import { Routes, Route } from 'react-router-dom'
+import Home from './views/Home'
+import Dashboard from './views/Dashboard'
+import Login from './views/Login'
+import Create from './views/Create'
+export default function App() {
+    const [ user, setUser ] =useState({
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    })
+    return (
+        <div>
+            <Nav user={user} setUser={setUser}/>
+
+            <Routes>
+                <Route path='/' element={<Home/>} />
+                <Route path='/dashboard' element={<Dashboard user={user}/>} />
+                <Route path='/login' element={<Login setUser={setUser}/>} />
+                <Route path='/create' element={<Create user={user}/>} />
+            </Routes>
+        </div>
+    )
 }
-
-export default App;
